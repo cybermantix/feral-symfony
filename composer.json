@@ -1,5 +1,5 @@
 {
-    "name": "nodez/runner",
+    "name": "nodez/inline",
     "description": "This package provides a symfony bundle to make Nodez available as a symfony package.",
     "keywords": ["symfony", "bundle", "bpms"],
     "homepage": "https://nodez.net",
