@@ -24,6 +24,10 @@ class NodezInlineBundle extends AbstractBundle
                 ->arrayNode('process')
                     ->children()
                         ->scalarNode('configuration_directory')->end()
+                        ->arrayNode('included_sources')
+                            ->info('Which default sources of node code and catalog nodes should be included.')
+                            ->prototype('scalar')
+                            ->end()
                     ->end()
                 ->end()
             ->end()
@@ -44,27 +48,33 @@ class NodezInlineBundle extends AbstractBundle
             ->autowire()
             ->autoconfigure();
 
-        //'nodez.node_code'
+        //'nodez.nodecode'
 
-        // TAGGED NODE CODE SOURCE
-        $services
-            ->set('nodecode.source.tagged', NodeCodeSource::class)
-            ->public()
-            ->args([tagged_iterator('nodez.node_code_source')])
-            ->tag('nodez.node_code_source');
+        // INCLUDED SOURCES OF INFORMATION
+        if (!empty($config['process']['included_sources'])) {
+            if (in_array('tagged_nodecode', $config['process']['included_sources'])) {
+                $services
+                    ->set('nodecode.source.tagged', NodeCodeSource::class)
+                    ->public()
+                    ->args([tagged_iterator('nodez.nodecode_source')])
+                    ->tag('nodez.nodecode_source');
+            }
+            
+            if (in_array('tagged_catalog', $config['process']['included_sources'])) {
+                $services
+                    ->set('catalog.source.tagged', CatalogSource::class)
+                    ->public()
+                    ->args([tagged_iterator('nodez.catalog_node')])
+                    ->tag('nodez.catalog_source');
+            }
+        }
 
-        // TAGGED NODE CODE SOURCE
-        $services
-            ->set('catalog.source.tagged', CatalogSource::class)
-            ->public()
-            ->args([tagged_iterator('nodez.catalog_node')])
-            ->tag('nodez.catalog_source');
 
         // NODE CODE FACTORY
         $services
             ->set(NodeCodeFactory::class, NodeCodeFactory::class)
             ->public()
-            ->args([tagged_iterator('nodez.node_code_source')]);
+            ->args([tagged_iterator('nodez.nodecode_source')]);
 
         // CATALOG
         $services

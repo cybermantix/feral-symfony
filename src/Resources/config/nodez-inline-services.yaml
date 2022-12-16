@@ -42,8 +42,8 @@ services:
         Nodez\Core\Process\Validator\ValidatorInterface:
             tags: [ 'nodez.process_validator' ]
         Nodez\Core\Process\NodeCode\NodeCodeSource\NodeCodeSourceInterface:
-            tags: [ 'nodez.node_code_source' ]
+            tags: [ 'nodez.nodecode_source' ]
         Nodez\Core\Process\NodeCode\NodeCodeInterface:
-            tags: [ 'nodez.node_code' ]
+            tags: [ 'nodez.nodecode' ]
 
 
