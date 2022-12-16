@@ -22,12 +22,10 @@ services:
             - '../src/Kernel.php'
             - '../src/Utility/'
     # CORE
-    Nodez\Core\:
-        autowire: false
-        resource: '../../../vendor/nodez/core/src'
+    Nodez\Core\Process\Engine\ProcessEngine: ~
+    Nodez\Core\Process\ProcessJsonHydrator: ~
+    Nodez\Core\Process\Catalog\CatalogInterface: '@Nodez\Core\Process\Catalog\Catalog'
 
-
-    Nodez\Core\Process\Catalog\Catalog:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -45,5 +43,7 @@ services:
             tags: [ 'nodez.nodecode_source' ]
         Nodez\Core\Process\NodeCode\NodeCodeInterface:
             tags: [ 'nodez.nodecode' ]
+        Nodez\Core\Process\ProcessInterface:
+            tags: [ 'nodez.process' ]
 
 

@@ -33,9 +33,15 @@ class ValidateProcessesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Validate a process');
-        $key = $input->getArgument('key');
-        $processes = $this->factory->getAllProcesses();
+        $output->writeln('Validate processes');
+        $requestKey = $input->getArgument('key');
+
+        if (!empty($requestKey)) {
+            $processes = [$this->factory->build($requestKey)];
+        } else {
+            $processes = $this->factory->getAllProcesses();
+        }
+
         $allErrors = [];
         foreach ($processes as $process) {
             $errors = $this->validator->validate($process);

@@ -1,7 +1,8 @@
 {
     "name": "nodez/inline",
+    "version": "1.0.1",
     "description": "This package provides a symfony bundle to make Nodez available as a symfony package.",
-    "keywords": ["symfony", "bundle", "bpms"],
+    "keywords": ["symfony", "bundle", "bpms", "nodez"],
     "homepage": "https://nodez.net",
     "type": "symfony-bundle",
     "license": "pache-2.0",

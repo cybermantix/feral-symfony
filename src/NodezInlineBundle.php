@@ -7,12 +7,13 @@ use Nodez\Core\Process\Catalog\CatalogSource\CatalogSource;
 use Nodez\Core\Process\NodeCode\NodeCodeFactory;
 use Nodez\Core\Process\NodeCode\NodeCodeSource\NodeCodeSource;
 use Nodez\Core\Process\ProcessFactory;
+use Nodez\Core\Process\ProcessSource;
+use Nodez\Core\Process\Reader\DirectoryProcessReader;
 use Nodez\Core\Process\Validator\ProcessValidator;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
-use Nodez\Core\Process\Reader\DirectoryProcessReader;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 class NodezInlineBundle extends AbstractBundle
@@ -52,20 +53,28 @@ class NodezInlineBundle extends AbstractBundle
 
         // INCLUDED SOURCES OF INFORMATION
         if (!empty($config['process']['included_sources'])) {
-            if (in_array('tagged_nodecode', $config['process']['included_sources'])) {
+            if (in_array('tagged_nodecode_source', $config['process']['included_sources'])) {
                 $services
                     ->set('nodecode.source.tagged', NodeCodeSource::class)
                     ->public()
-                    ->args([tagged_iterator('nodez.nodecode_source')])
+                    ->args([tagged_iterator('nodez.nodecode')])
                     ->tag('nodez.nodecode_source');
             }
-            
-            if (in_array('tagged_catalog', $config['process']['included_sources'])) {
+
+            if (in_array('tagged_catalog_source', $config['process']['included_sources'])) {
                 $services
                     ->set('catalog.source.tagged', CatalogSource::class)
                     ->public()
                     ->args([tagged_iterator('nodez.catalog_node')])
                     ->tag('nodez.catalog_source');
+            }
+
+            if (in_array('tagged_process_source', $config['process']['included_sources'])) {
+                $services
+                    ->set('process.source.tagged', ProcessSource::class)
+                    ->public()
+                    ->args([tagged_iterator('nodez.process')])
+                    ->tag('nodez.process_source');
             }
         }
 
@@ -93,6 +102,7 @@ class NodezInlineBundle extends AbstractBundle
             ->set(ProcessValidator::class, ProcessValidator::class)
             ->public()
             ->args([tagged_iterator('nodez.process_validator')]);
+
 
         // IF THE FILE SOURCE IS CONFIGURED, ADD AS A SOURCE
         if (!empty($config['process']['configuration_directory'])) {
