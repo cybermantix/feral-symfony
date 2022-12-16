@@ -4,6 +4,7 @@ namespace Nodez\Inline\Console\Command;
 
 use DataObject\Configuration;
 use Nodez\Core\Process\ProcessFactory;
+use Nodez\Core\Process\ProcessInterface;
 use Nodez\Core\Process\Validator\ProcessValidator;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
@@ -13,15 +14,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:validate:processes',
-    description: 'Validate all of the processes or use a filter to match processes.'
+    name: 'nodez:list:processes',
+    description: 'List all of the processes or use a filter to match processes.'
 )]
-class ValidateProcessesCommand extends Command
+class ListProcessesCommand extends Command
 {
 
     public function __construct(
-        private ProcessFactory $factory,
-        private ProcessValidator $validator
+        private ProcessFactory $factory
     ) {
         parent::__construct();
     }
@@ -33,15 +33,11 @@ class ValidateProcessesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Validate a process');
-        $key = $input->getArgument('key');
+        $output->writeln('List the processes');
         $processes = $this->factory->getAllProcesses();
-        $allErrors = [];
+        /** @var ProcessInterface $process */
         foreach ($processes as $process) {
-            $errors = $this->validator->validate($process);
-            if (!empty($errors)) {
-                $allErrors[$process->getKey()] = $errors;
-            }
+            $output->writeln(sprintf(' - %s', $process->getKey()));
         }
         return Command::SUCCESS;
     }

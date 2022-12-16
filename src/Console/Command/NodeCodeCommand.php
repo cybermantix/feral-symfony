@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:node-code',
+    name: 'nodez:list:node-code',
     description: 'List all of Node Codes on the platform'
 )]
 class NodeCodeCommand extends Command
