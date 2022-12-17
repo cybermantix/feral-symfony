@@ -21,7 +21,19 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Utility/'
+
     # CORE
+    Nodez\Core\Process\Catalog\CatalogNode\:
+        resource: '../../../../core/src/Process/Catalog/CatalogNode'
+        exclude:
+            - '../../../../core/src/Process/Catalog/CatalogNode/CatalogNode'
+
+    Nodez\Core\Process\NodeCode\Data\:
+        resource: '../../../../core/src/Process/NodeCode/Data'
+
+    Nodez\Core\Process\NodeCode\Flow\:
+        resource: '../../../../core/src/Process/NodeCode/Flow'
+
     Nodez\Core\Process\Engine\ProcessEngine: ~
     Nodez\Core\Process\ProcessJsonHydrator: ~
     Nodez\Core\Process\Catalog\CatalogInterface: '@Nodez\Core\Process\Catalog\Catalog'
@@ -46,4 +58,6 @@ services:
         Nodez\Core\Process\ProcessInterface:
             tags: [ 'nodez.process' ]
 
+    # CATALOG
+    #nodez.add:
 
