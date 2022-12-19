@@ -1,14 +1,14 @@
 <?php
 
-namespace Nodez\Inline\Process\Event\Listener;
+namespace Feral\Inline\Process\Event\Listener;
 
-use Nodez\Core\Process\Event\ProcessEndEvent;
-use Nodez\Core\Process\Event\ProcessExceptionEvent;
-use Nodez\Core\Process\Event\ProcessNodeAfterEvent;
-use Nodez\Core\Process\Event\ProcessNodeBeforeEvent;
-use Nodez\Core\Process\Event\ProcessNodeNotifyEvent;
-use Nodez\Core\Process\Event\ProcessStartEvent;
-use Nodez\Core\Process\Result\Result;
+use Feral\Core\Process\Event\ProcessEndEvent;
+use Feral\Core\Process\Event\ProcessExceptionEvent;
+use Feral\Core\Process\Event\ProcessNodeAfterEvent;
+use Feral\Core\Process\Event\ProcessNodeBeforeEvent;
+use Feral\Core\Process\Event\ProcessNodeNotifyEvent;
+use Feral\Core\Process\Event\ProcessStartEvent;
+use Feral\Core\Process\Result\Result;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

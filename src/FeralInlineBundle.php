@@ -1,15 +1,15 @@
 <?php
 
-namespace Nodez\Inline;
+namespace Feral\Inline;
 
-use Nodez\Core\Process\Catalog\Catalog;
-use Nodez\Core\Process\Catalog\CatalogSource\CatalogSource;
-use Nodez\Core\Process\NodeCode\NodeCodeFactory;
-use Nodez\Core\Process\NodeCode\NodeCodeSource\NodeCodeSource;
-use Nodez\Core\Process\ProcessFactory;
-use Nodez\Core\Process\ProcessSource;
-use Nodez\Core\Process\Reader\DirectoryProcessReader;
-use Nodez\Core\Process\Validator\ProcessValidator;
+use Feral\Core\Process\Catalog\Catalog;
+use Feral\Core\Process\Catalog\CatalogSource\CatalogSource;
+use Feral\Core\Process\NodeCode\NodeCodeFactory;
+use Feral\Core\Process\NodeCode\NodeCodeSource\NodeCodeSource;
+use Feral\Core\Process\ProcessFactory;
+use Feral\Core\Process\ProcessSource;
+use Feral\Core\Process\Reader\DirectoryProcessReader;
+use Feral\Core\Process\Validator\ProcessValidator;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -22,7 +22,7 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_it
  * triggered from a controller, command, or any driver that runs
  * code with symfony.
  */
-class NodezInlineBundle extends AbstractBundle
+class FeralInlineBundle extends AbstractBundle
 {
     public function configure(DefinitionConfigurator $definition): void
     {
@@ -49,13 +49,13 @@ class NodezInlineBundle extends AbstractBundle
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import('Resources/config/nodez-inline-services.yaml');
+        $container->import('Resources/config/feral-inline-services.yaml');
         $services = $container->services();
         $services->defaults()
             ->autowire()
             ->autoconfigure();
 
-        //'nodez.nodecode'
+        //'feral.nodecode'
 
         // INCLUDED SOURCES OF INFORMATION
         if (!empty($config['process']['included_sources'])) {
@@ -63,24 +63,24 @@ class NodezInlineBundle extends AbstractBundle
                 $services
                     ->set('nodecode.source.tagged', NodeCodeSource::class)
                     ->public()
-                    ->args([tagged_iterator('nodez.nodecode')])
-                    ->tag('nodez.nodecode_source');
+                    ->args([tagged_iterator('feral.nodecode')])
+                    ->tag('feral.nodecode_source');
             }
 
             if (in_array('tagged_catalog_source', $config['process']['included_sources'])) {
                 $services
                     ->set('catalog.source.tagged', CatalogSource::class)
                     ->public()
-                    ->args([tagged_iterator('nodez.catalog_node')])
-                    ->tag('nodez.catalog_source');
+                    ->args([tagged_iterator('feral.catalog_node')])
+                    ->tag('feral.catalog_source');
             }
 
             if (in_array('tagged_process_source', $config['process']['included_sources'])) {
                 $services
                     ->set('process.source.tagged', ProcessSource::class)
                     ->public()
-                    ->args([tagged_iterator('nodez.process')])
-                    ->tag('nodez.process_source');
+                    ->args([tagged_iterator('feral.process')])
+                    ->tag('feral.process_source');
             }
         }
 
@@ -89,25 +89,25 @@ class NodezInlineBundle extends AbstractBundle
         $services
             ->set(NodeCodeFactory::class, NodeCodeFactory::class)
             ->public()
-            ->args([tagged_iterator('nodez.nodecode_source')]);
+            ->args([tagged_iterator('feral.nodecode_source')]);
 
         // CATALOG
         $services
             ->set(Catalog::class, Catalog::class)
             ->public()
-            ->args([tagged_iterator('nodez.catalog_source')]);
+            ->args([tagged_iterator('feral.catalog_source')]);
 
         // PROCESS FACTORY
         $services
             ->set(ProcessFactory::class, ProcessFactory::class)
             ->public()
-            ->args([tagged_iterator('nodez.process_source')]);
+            ->args([tagged_iterator('feral.process_source')]);
 
         // PROCESS VALIDATOR
         $services
             ->set(ProcessValidator::class, ProcessValidator::class)
             ->public()
-            ->args([tagged_iterator('nodez.process_validator')]);
+            ->args([tagged_iterator('feral.process_validator')]);
 
 
         // IF THE FILE SOURCE IS CONFIGURED, ADD AS A SOURCE
@@ -116,7 +116,7 @@ class NodezInlineBundle extends AbstractBundle
                 ->set('process.source.directory', DirectoryProcessReader::class)
                 ->public()
                 ->args([$config['process']['configuration_directory']])
-                ->tag('nodez.process_source');
+                ->tag('feral.process_source');
         }
     }
 }

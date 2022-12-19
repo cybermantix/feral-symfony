@@ -1,9 +1,9 @@
 <?php
 
-namespace Nodez\Inline\Console\Command;
+namespace Feral\Inline\Console\Command;
 
 use DataObject\Configuration;
-use Nodez\Core\Process\Catalog\Catalog;
+use Feral\Core\Process\Catalog\Catalog;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
 use Symfony\Component\Console\Command\Command;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:catalog:configuration',
+    name: 'feral:catalog:configuration',
     description: 'List the configuration for a catalog node.'
 )]
 class CatalogConfigurationCommand extends Command

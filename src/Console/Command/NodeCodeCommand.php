@@ -1,11 +1,11 @@
 <?php
 
-namespace Nodez\Inline\Console\Command;
+namespace Feral\Inline\Console\Command;
 
 use DataObject\Configuration;
-use Nodez\Core\Process\Catalog\Catalog;
-use Nodez\Core\Process\NodeCode\NodeCodeFactory;
-use Nodez\Core\Process\NodeCode\NodeCodeInterface;
+use Feral\Core\Process\Catalog\Catalog;
+use Feral\Core\Process\NodeCode\NodeCodeFactory;
+use Feral\Core\Process\NodeCode\NodeCodeInterface;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
 use Symfony\Component\Console\Command\Command;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:list:node-code',
+    name: 'feral:list:node-code',
     description: 'List all of Node Codes on the platform'
 )]
 class NodeCodeCommand extends Command

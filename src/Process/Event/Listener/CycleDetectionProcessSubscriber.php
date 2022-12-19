@@ -1,17 +1,17 @@
 <?php
 
-namespace Nodez\Inline\Process\Event\Listener;
+namespace Feral\Inline\Process\Event\Listener;
 
-use Nodez\Core\Process\Event\ProcessEndEvent;
-use Nodez\Core\Process\Event\ProcessNodeBeforeEvent;
-use Nodez\Core\Process\Event\ProcessStartEvent;
-use Nodez\Core\Process\Exception\MaximumNodeRunsException;
+use Feral\Core\Process\Event\ProcessEndEvent;
+use Feral\Core\Process\Event\ProcessNodeBeforeEvent;
+use Feral\Core\Process\Event\ProcessStartEvent;
+use Feral\Core\Process\Exception\MaximumNodeRunsException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class CycleDetectionProcessSubscriber
- * @package Nodez\Core\Process\Event\Listener
+ * @package Feral\Core\Process\Event\Listener
  */
 class CycleDetectionProcessSubscriber implements EventSubscriberInterface
 {

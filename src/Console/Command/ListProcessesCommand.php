@@ -1,11 +1,11 @@
 <?php
 
-namespace Nodez\Inline\Console\Command;
+namespace Feral\Inline\Console\Command;
 
 use DataObject\Configuration;
-use Nodez\Core\Process\ProcessFactory;
-use Nodez\Core\Process\ProcessInterface;
-use Nodez\Core\Process\Validator\ProcessValidator;
+use Feral\Core\Process\ProcessFactory;
+use Feral\Core\Process\ProcessInterface;
+use Feral\Core\Process\Validator\ProcessValidator;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
 use Symfony\Component\Console\Command\Command;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:list:processes',
+    name: 'feral:list:processes',
     description: 'List all of the processes or use a filter to match processes.'
 )]
 class ListProcessesCommand extends Command

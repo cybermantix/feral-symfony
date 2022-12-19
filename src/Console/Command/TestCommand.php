@@ -1,12 +1,12 @@
 <?php
 
-namespace Nodez\Inline\Console\Command;
+namespace Feral\Inline\Console\Command;
 
 use DataObject\Configuration;
-use Nodez\Core\Process\Engine\ProcessEngine;
-use Nodez\Core\Process\ProcessJsonHydrator;
-use Nodez\Core\Process\Reader\DirectoryProcessReader;
-use Nodez\Core\Process\Validator\ProcessValidator;
+use Feral\Core\Process\Engine\ProcessEngine;
+use Feral\Core\Process\ProcessJsonHydrator;
+use Feral\Core\Process\Reader\DirectoryProcessReader;
+use Feral\Core\Process\Validator\ProcessValidator;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[Console\AsCommand(
-    name: 'nodez:test',
+    name: 'feral:test',
     description: 'Simple tests for Nodez'
 )]
 class TestCommand extends Command
