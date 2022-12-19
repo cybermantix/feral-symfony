@@ -27,7 +27,7 @@ class NodeCodeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Nodez Node Codes');
+        $output->writeln('Feral Node Codes');
         $nodeCodes = $this->factory->getNodeCodes();
         $groups = [];
         foreach ($nodeCodes as $node) {

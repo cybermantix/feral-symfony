@@ -6,19 +6,19 @@ Time after time at tech conference, online, some asshole manager I was criticise
 
 So you don't think a No-Code-Low-Code system should be written in PHP?? Fine, [Piss off and Go Away](https://www.urbandictionary.com/define.php?term=Elitest).
 
-Nodez is a No-Code-Low-Code framework written in PHP. This project is the free and open core which contains the basic tools for Nodez.
+Feral is a No-Code-Low-Code framework written in PHP. This project is the free and open core which contains the basic tools for Nodez.
 
-# Nodez
+# Feral
 
-As you already know, Nodez stands for No/Low-Code and yes, it's written in PHP.  The point of Nodez is to make an easy to use, easy to modify No/Low-Code solution that is accessible to anybody.
+As you already know, Feral stands for No/Low-Code and yes, it's written in PHP.  The point of Feral is to make an easy to use, easy to modify No/Low-Code solution that is accessible to anybody.
 
-## Nodez-Core
+## Feral-Core
 
-This bundle uses the framework-agnostic Nodez Core package for the guts of the processes. 
+This bundle uses the framework-agnostic Feral Core package for the guts of the processes. 
 
-## Nodez - Bundle for Inline Mode
+## Feral - Bundle for Inline Mode
 
-This bundle is used for bolting the Nodez system directly into your code. You will call the process engine from your controllers, commands, or any other driver.
+This bundle is used for bolting the Feral system directly into your code. You will call the process engine from your controllers, commands, or any other driver.
 
 ## Our model : Free-Promium
 

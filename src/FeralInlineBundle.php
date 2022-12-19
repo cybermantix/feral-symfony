@@ -17,8 +17,8 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 /**
- * The Nodez inline bundle provides the functionality to use Nodez
- * inside of code in a symfony application. A Nodez process can be
+ * The Feral inline bundle provides the functionality to use Feral
+ * inside of code in a symfony application. A Feral process can be
  * triggered from a controller, command, or any driver that runs
  * code with symfony.
  */

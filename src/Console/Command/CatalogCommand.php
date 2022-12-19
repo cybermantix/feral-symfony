@@ -25,7 +25,7 @@ class CatalogCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Nodez Catalog');
+        $output->writeln('Feral Catalog');
         $catalogNodes = $this->catalog->getCatalogNodes();
         $groups = [];
         foreach ($catalogNodes as $node) {

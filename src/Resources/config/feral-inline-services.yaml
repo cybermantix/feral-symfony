@@ -57,7 +57,3 @@ services:
             tags: [ 'feral.nodecode' ]
         Feral\Core\Process\ProcessInterface:
             tags: [ 'feral.process' ]
-
-    # CATALOG
-    #feral.add:
-

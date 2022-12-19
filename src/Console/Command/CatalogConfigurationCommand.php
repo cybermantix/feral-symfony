@@ -31,7 +31,7 @@ class CatalogConfigurationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Nodez Catalog Node Configuration');
+        $output->writeln('Feral Catalog Node Configuration');
         $key = $input->getArgument('key');
         $catalogNode = $this->catalog->getCatalogNode($key);
         $descriptions = $catalogNode->getConfigurationDescriptions();
