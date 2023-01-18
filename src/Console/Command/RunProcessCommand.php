@@ -102,16 +102,18 @@ class RunProcessCommand extends Command
             }
         }
 
+        // CONTEXT
+        $context = new Context();
+        foreach ($contextData as $key => $value) {
+            $context->set($key, $value);
+        }
 
         // PROCESS
         if ($output->isVerbose()) {
             $this->writeHeader($output, 'process');
         }
         $process = $this->factory->build($processKey);
-        $context = $process->getContext();
-        foreach ($contextData as $k => $v) {
-            $context->set($k, $v);
-        }
+
 
         // VALIDATE BEFORE RUNNING
         $errors = $this->validator->validate($process);
@@ -123,7 +125,7 @@ class RunProcessCommand extends Command
             return Command::FAILURE;
         }
 
-        $this->engine->process($process);
+        $this->engine->process($process, $context);
 
         if ($output->isVerbose()) {
             $this->writeHeader($output, 'finalize');

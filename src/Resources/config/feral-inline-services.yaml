@@ -38,6 +38,11 @@ services:
     Feral\Core\Process\ProcessJsonHydrator: ~
     Feral\Core\Process\Catalog\CatalogInterface: '@Feral\Core\Process\Catalog\Catalog'
 
+    feral.runner:
+        class: 'Nodez\Core\Process\Runner\Runner'
+        arguments: ['@Feral\Core\Process\ProcessFactory', '@Feral\Core\Process\Engine\ProcessEngine']
+
+    Nodez\Core\Process\Runner\RunnerInterface: '@feral.runner'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
