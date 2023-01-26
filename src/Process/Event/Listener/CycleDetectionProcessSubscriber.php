@@ -36,15 +36,15 @@ class CycleDetectionProcessSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onStartProcess(Event $event)
+    public function onStartProcess(ProcessStartEvent $event)
     {
         $this->nodeVisits = [];
     }
 
     /**
-     * @param Event|ProcessNodeBeforeEvent $event
+     * @param ProcessNodeBeforeEvent $event
      */
-    public function onBeforeNode(Event $event)
+    public function onBeforeNode(ProcessNodeBeforeEvent $event)
     {
         $instanceMaximumVisits = $this->maximumVisits;
         $context = $event->getContext();

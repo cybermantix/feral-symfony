@@ -3,6 +3,7 @@
 namespace Feral\Inline\Console\Command;
 
 use DataObject\Configuration;
+use Feral\Core\Process\Context\Context;
 use Feral\Core\Process\Engine\ProcessEngine;
 use Feral\Core\Process\ProcessFactory;
 use Feral\Core\Process\ProcessJsonHydrator;
