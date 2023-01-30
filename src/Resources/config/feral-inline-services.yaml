@@ -39,7 +39,7 @@ services:
     Feral\Core\Process\Catalog\CatalogInterface: '@Feral\Core\Process\Catalog\Catalog'
 
     feral.runner:
-        class: 'Nodez\Core\Process\Runner\Runner'
+        class: 'Feral\Core\Process\Runner\Runner'
         arguments: ['@Feral\Core\Process\ProcessFactory', '@Feral\Core\Process\Engine\ProcessEngine']
 
     Feral\Core\Process\Runner\RunnerInterface: '@feral.runner'
