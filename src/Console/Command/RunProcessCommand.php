@@ -37,7 +37,7 @@ class RunProcessCommand extends Command
     protected function configure(): void
     {
         $this->addArgument('process', InputArgument::REQUIRED, 'The process key to process.');
-        $this->addArgument('context', InputArgument::OPTIONAL, 'Data used to init the context.', self::DEFAULT_CONTEXT);
+        $this->addArgument('context', InputArgument::OPTIONAL, 'Data used to init the context. Use a path to a valid file or raw JSON in a string. Note if using linux command line, use backslash for keys. Example: "{\"test\": 10}"', self::DEFAULT_CONTEXT);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -81,7 +81,7 @@ class RunProcessCommand extends Command
         }
         $contextData = json_decode($rawContext, true);
         if (!empty($rawContext) && $rawContext != self::DEFAULT_CONTEXT && empty($contextData)) {
-            $output->writeln(sprintf("<error>Invalid context</error>\n%s", $rawContext));
+            $output->writeln(sprintf("<error>Invalid context</error>\n%s\nJSON Error Code: %s", $rawContext, $this->getErrorCode(json_last_error())));
             return Command::FAILURE;
         }
         if ($output->isDebug() && !empty($contextData)) {
@@ -148,5 +148,23 @@ class RunProcessCommand extends Command
         $headerPadding = 2;
         $dashes = str_repeat('-', strlen($text) + $headerPadding * 2);
         $output->writeln(sprintf("<comment>%s\n  %s\n%s", $dashes, strtoupper($text), $dashes));
+    }
+
+    /**
+     * Convert the error code to human readable error
+     * @param int $error
+     * @return string
+     */
+    protected function getErrorCode(int $error): string
+    {
+        switch ($error) {
+            case JSON_ERROR_NONE: return ' - No errors';
+            case JSON_ERROR_DEPTH: return ' - Maximum stack depth exceeded';
+            case JSON_ERROR_STATE_MISMATCH: return ' - Underflow or the modes mismatch';
+            case JSON_ERROR_CTRL_CHAR: return ' - Unexpected control character found';
+            case JSON_ERROR_SYNTAX: return ' - Syntax error, malformed JSON';
+            case JSON_ERROR_UTF8: return ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+            default: return ' - Unknown error';
+        }
     }
 }
