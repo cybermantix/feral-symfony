@@ -55,6 +55,9 @@ class FeralInlineBundle extends AbstractBundle
             ->autowire()
             ->autoconfigure();
 
+        if ($container->env() == 'dev') {
+            $container->import('Resources/config/feral-inline-dev-services.yaml');
+        }
         //'feral.nodecode'
 
         // INCLUDED SOURCES OF INFORMATION
