@@ -2,20 +2,31 @@
 
 namespace Feral\Inline\Process\Event\Listener;
 
+use Feral\Core\Process\Event\ProcessExceptionEvent;
+use Feral\Core\Process\Event\ProcessNodeNotifyEvent;
 use Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
 use Feral\Core\Process\Event\ProcessEndEvent;
 use Feral\Core\Process\Event\ProcessNodeAfterEvent;
 use Feral\Core\Process\Event\ProcessNodeBeforeEvent;
 use Feral\Core\Process\Event\ProcessStartEvent;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-#[AsEventListener(event: ProcessStartEvent::class, method: 'onStartEvent')]
-#[AsEventListener(event: ProcessNodeBeforeEvent::class, method: 'onNodeBeforeEvent')]
-#[AsEventListener(event: ProcessNodeAfterEvent::class, method: 'onNodeAfterEvent')]
-#[AsEventListener(event: ProcessEndEvent::class, method: 'onEndEvent')]
-class ProcessEventListener
+class ProfilerProcessSubscriber implements EventSubscriberInterface
 {
     public function __construct(private ProcessTraceCollectorInterface $collector){}
+
+    /**
+     * @inheritDoc
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            ProcessStartEvent::class => ['onStartEvent'],
+            ProcessEndEvent::class => ['onEndEvent'],
+            ProcessNodeBeforeEvent::class => ['onNodeBeforeEvent'],
+            ProcessNodeAfterEvent::class => ['onNodeAfterEvent']
+        ];
+    }
 
     public function onStartEvent(ProcessStartEvent $event): void
     {
