@@ -19,6 +19,6 @@ services:
                 # must match the value returned by the getName() method
                 id: 'Feral\Inline\Process\DataCollector\ProcessCollector'
                 # optional template (it has more priority than the value returned by getTemplate())
-                template: 'data_collector/process.html.twig'
+                template: '@FeralInline/data_collector/process'
                 # optional priority (positive or negative integer; default = 0)
                 # priority: 300
