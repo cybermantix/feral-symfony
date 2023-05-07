@@ -1,0 +1,24 @@
+
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+
+    Feral\Inline\Process\Event\Listener\ProcessEventListener: ~
+    Feral\Inline\Process\DataCollector\Trace\ProcessRunTrace: ~
+    Feral\Inline\Process\DataCollector\Trace\ProcessTrace: ~
+    Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollector: ~
+    Feral\Inline\Process\DataCollector\Trace\ProcessBuilder: ~
+    Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollectorInterface: '@Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollector'
+    Feral\Inline\Process\DataCollector\Trace\ProcessBuilderInterface: '@Feral\Inline\Process\DataCollector\Trace\ProcessBuilder'
+    Feral\Inline\Process\DataCollector\ProcessCollector:
+        tags:
+            -
+                name: data_collector
+                # must match the value returned by the getName() method
+                id: 'Feral\Inline\Process\DataCollector\ProcessCollector'
+                # optional template (it has more priority than the value returned by getTemplate())
+                template: 'data_collector/process.html.twig'
+                # optional priority (positive or negative integer; default = 0)
+                # priority: 300
