@@ -38,6 +38,9 @@ services:
     Feral\Core\Process\ProcessJsonHydrator: ~
     Feral\Core\Process\Catalog\CatalogInterface: '@Feral\Core\Process\Catalog\Catalog'
 
+    Feral\Core\Process\Modification\JSONModification: ~
+    Feral\Core\Process\Modification\JSONModificationInterface: '@Feral\Core\Process\Modification\JSONModification'
+
     feral.runner:
         class: 'Feral\Core\Process\Runner\Runner'
         arguments: ['@Feral\Core\Process\ProcessFactory', '@Feral\Core\Process\Engine\ProcessEngine']
