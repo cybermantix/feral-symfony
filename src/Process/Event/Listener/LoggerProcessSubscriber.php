@@ -1,6 +1,6 @@
 <?php
 
-namespace Feral\Inline\Process\Event\Listener;
+namespace Feral\Symfony\Process\Event\Listener;
 
 use Feral\Core\Process\Event\ProcessEndEvent;
 use Feral\Core\Process\Event\ProcessExceptionEvent;

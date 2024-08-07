@@ -1,12 +1,12 @@
 <?php
 
-namespace Feral\Inline\Process\DataCollector;
+namespace Feral\Symfony\Process\DataCollector;
 
 use Symfony\Bundle\FrameworkBundle\DataCollector\AbstractDataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
-use Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
+use Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
 
 class ProcessCollector extends AbstractDataCollector
 {

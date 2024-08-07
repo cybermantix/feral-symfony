@@ -1,10 +1,10 @@
 <?php
 
-namespace Feral\Inline\Process\Event\Listener;
+namespace Feral\Symfony\Process\Event\Listener;
 
 use Feral\Core\Process\Event\ProcessExceptionEvent;
 use Feral\Core\Process\Event\ProcessNodeNotifyEvent;
-use Feral\Inline\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
+use Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
 use Feral\Core\Process\Event\ProcessEndEvent;
 use Feral\Core\Process\Event\ProcessNodeAfterEvent;
 use Feral\Core\Process\Event\ProcessNodeBeforeEvent;

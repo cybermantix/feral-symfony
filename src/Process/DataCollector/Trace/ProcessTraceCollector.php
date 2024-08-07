@@ -1,6 +1,6 @@
 <?php
 
-namespace Feral\Inline\Process\DataCollector\Trace;
+namespace Feral\Symfony\Process\DataCollector\Trace;
 
 
 use Feral\Core\Process\Context\ContextInterface;
@@ -11,7 +11,7 @@ use Feral\Core\Process\Result\ResultInterface;
 /**
  * Class ProcessTraceCollector
  * Collect traces during all the processes.
- * @package Feral\Inline\Process\DataCollector\Trace
+ * @package Feral\Symfony\Process\DataCollector\Trace
  */
 class ProcessTraceCollector implements ProcessTraceCollectorInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Feral\Inline;
+namespace Feral\Symfony;
 
 use Feral\Core\Process\Catalog\Catalog;
 use Feral\Core\Process\Catalog\CatalogSource\CatalogSource;
@@ -17,12 +17,12 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 /**
- * The Feral inline bundle provides the functionality to use Feral
+ * The Feral symfony bundle provides the functionality to use Feral
  * inside of code in a symfony application. A Feral process can be
  * triggered from a controller, command, or any driver that runs
  * code with symfony.
  */
-class FeralInlineBundle extends AbstractBundle
+class FeralSymfonyBundle extends AbstractBundle
 {
     public function configure(DefinitionConfigurator $definition): void
     {
@@ -49,14 +49,14 @@ class FeralInlineBundle extends AbstractBundle
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import('Resources/config/feral-inline-services.yaml');
+        $container->import('Resources/config/feral-symfony-services.yaml');
         $services = $container->services();
         $services->defaults()
             ->autowire()
             ->autoconfigure();
 
         if ($container->env() == 'dev') {
-            $container->import('Resources/config/feral-inline-dev-services.yaml');
+            $container->import('Resources/config/feral-symfony-dev-services.yaml');
         }
         //'feral.nodecode'
 
