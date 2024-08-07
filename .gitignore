@@ -6,6 +6,7 @@
 /public/
 
 .idea
+.DS_Store
 
 
 ###> symfony/framework-bundle ###
@@ -27,6 +28,3 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-.DS_Store
-.idea/webResources.xml
-.idea/vcs.xml
