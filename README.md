@@ -16,7 +16,7 @@ As you already know, Feral stands for No/Low-Code and yes, it's written in PHP. 
 
 This bundle uses the framework-agnostic Feral Core package for the guts of the processes. 
 
-## Feral - Bundle for Inline Mode
+## Feral Symfony - Bundle for Symfony
 
 This bundle is used for bolting the Feral system directly into your code. You will call the process engine from your controllers, commands, or any other driver.
 

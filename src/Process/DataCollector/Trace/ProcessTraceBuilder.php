@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Feral\Inline\Process\DataCollector\Trace;
+namespace Feral\Symfony\Process\DataCollector\Trace;
 
 use Feral\Core\Process\Context\ContextInterface;
 use Feral\Core\Process\Node\NodeInterface;
@@ -10,7 +10,7 @@ use Feral\Core\Process\Result\ResultInterface;
 /**
  * Class ProcessTraceBuilder
  * Build the process trace object and easy building of the process run traces.
- * @package Feral\Inline\Process\DataCollector\Trace
+ * @package Feral\Symfony\Process\DataCollector\Trace
  */
 class ProcessTraceBuilder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Feral\Inline\Console\Command;
+namespace Feral\Symfony\Console\Command;
 
 use DataObject\Configuration;
 use Feral\Core\Process\Context\Context;

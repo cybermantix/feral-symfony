@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Feral\Inline\Process\DataCollector\Trace;
+namespace Feral\Symfony\Process\DataCollector\Trace;
 
 class ProcessTrace
 {
