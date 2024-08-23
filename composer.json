@@ -1,6 +1,5 @@
 {
     "name": "feral/symfony",
-    "version": "1.0.24",
     "description": "This package provides a symfony bundle to make Feral available as a symfony package.",
     "keywords": ["symfony", "bundle", "bpms", "feral"],
     "homepage": "https://feralflow.net",

@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'feral:list:node-code',
     description: 'List all of Node Codes on the platform'
 )]
-class NodeCodeCommand extends Command
+class ListNodeCodeCommand extends Command
 {
 
     public function __construct(
@@ -27,7 +27,7 @@ class NodeCodeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Feral Node Codes');
+        $output->writeln('<options=bold>Feral Node Codes</>');
         $nodeCodes = $this->factory->getNodeCodes();
         $groups = [];
         foreach ($nodeCodes as $node) {
@@ -37,8 +37,9 @@ class NodeCodeCommand extends Command
             }
             $groups[$group][] = $node;
         }
+        $output->writeln('');
         foreach ($groups as $key => $nodes) {
-            $output->writeln(strtoupper($key));
+            $output->writeln('<options=underscore>' . strtoupper($key) . '</>');
             /** @var NodeCodeInterface $node */
             foreach ($nodes as $node) {
                 $output->writeln(sprintf(" - %s <info>(%s)</info> : <comment>%s</comment>", $node->getName(), $node->getKey(), $node->getDescription()));
