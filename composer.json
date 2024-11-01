@@ -9,7 +9,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "feral/core": "^1.0.44"
+        "feral/core": "^1.0.48"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

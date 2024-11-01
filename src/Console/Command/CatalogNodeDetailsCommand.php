@@ -6,6 +6,7 @@ use DataObject\Configuration;
 use Feral\Core\Process\Attributes\ConfigurationDescriptionInterface;
 use Feral\Core\Process\Catalog\Catalog;
 use Feral\Core\Process\NodeCode\NodeCodeFactory;
+use Feral\Core\Process\Result\Description\ResultDescriptionInterface;
 use Reepository\ConfigurationRepository;
 use Symfony\Component\Console\Attribute as Console;
 use Symfony\Component\Console\Command\Command;
@@ -27,17 +28,22 @@ class CatalogNodeDetailsCommand extends Command
         parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this->addArgument('key', InputArgument::REQUIRED, 'The Catalog Node Key?');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $key = $input->getArgument('key');
+        $nodes = $this->catalog->getCatalogNodes();
+        foreach ($nodes as $node) {
+            $this->writeNode($node->getKey(), $output);
+        }
+        return Command::SUCCESS;
+    }
+
+    protected function writeNode(string $key, OutputInterface $output) {
         $catalogNode = $this->catalog->getCatalogNode($key);
 
-        $configurationDescriptions = [];
+        $requiredConfiguration = [];
+        $optionalConfiguration = [];
+        $catalogSuppliedValues = [];
+        $resultDescriptions = [];
 
         // NODE CONFIGURATION
         $nodeCode = $this->factory->getNodeCode($catalogNode->getNodeCodeKey());
@@ -46,7 +52,14 @@ class CatalogNodeDetailsCommand extends Command
         foreach ($nodeCodeAttributes as $attribute) {
             $instance = $attribute->newInstance();
             if (is_a($instance, ConfigurationDescriptionInterface::class)) {
-                $configurationDescriptions[$instance->getKey()] = $instance;
+                $defaultValue = $instance->getDefault();
+                if (empty($defaultValue)) {
+                    $requiredConfiguration[$instance->getKey()] = $instance;
+                } else {
+                    $optionalConfiguration[$instance->getKey()] = $instance;
+                }
+            } else if (is_a($instance, ResultDescriptionInterface::class)) {
+                $resultDescriptions[$instance->getResult()] = $instance->getDescription();
             }
         }
 
@@ -56,48 +69,87 @@ class CatalogNodeDetailsCommand extends Command
         foreach ($catalogAttributes as $attribute) {
             $instance = $attribute->newInstance();
             if (is_a($instance, ConfigurationDescriptionInterface::class)) {
-                $configurationDescriptions[$instance->getKey()] = $instance;
+                $defaultValue = $instance->getDefault();
+                if (empty($defaultValue)) {
+                    $requiredConfiguration[$instance->getKey()] = $instance;
+                } else if(isset($requiredConfiguration[$instance->getKey()])) {
+                    $optionalConfiguration[$instance->getKey()] = $instance;
+                    unset($requiredConfiguration[$instance->getKey()]);
+                } else {
+                    $optionalConfiguration[$instance->getKey()] = $instance;
+                }
+            }
+        }
+
+        $configuration = $catalogNode->getConfiguration();
+        if(!empty($configuration)) {
+            foreach ($configuration as $key => $value) {
+                if (isset($requiredConfiguration[$key])) {
+                    $catalogSuppliedValues[$key] = $requiredConfiguration[$key];
+                    unset($requiredConfiguration[$key]);
+                } else if (isset($optionalConfiguration[$key])) {
+                    $catalogSuppliedValues[$key] = $optionalConfiguration[$key];
+                    unset($optionalConfiguration[$key]);
+                }
             }
         }
 
         // DETAILS
         $output->writeln(sprintf(
-            '<options=bold>Feral Catalog Node "%s" (%s) Details</>',
+            "<options=bold>Catalog Node '%s'</>\nKey: %s\nDescription:%s",
             $catalogNode->getName(),
-            $catalogNode->getKey()
-            ));
-        $output->writeln(sprintf(
-                "<comment>%s</comment>\n\nNode Code: %s (%s) Category: %s\n<comment>%s</comment>",
-                $catalogNode->getDescription(),
-                $nodeCode->getName(),
-                $nodeCode->getKey(),
-                $nodeCode->getCategoryKey(),
-                $nodeCode->getDescription(),
-                )
-        );
+            $catalogNode->getKey(),
+            $catalogNode->getDescription()
+        ));
 
-        $configuration = $catalogNode->getConfiguration();
-        $output->writeln("\n<options=underscore>Catalog Node Configuration</>");
-        foreach ($configuration as $key => $value) {
-            $configuration = $configurationDescriptions[$key];
-            $output->writeln(sprintf(
-                " - %s <info>(%s)</info> = '%s' : <comment>%s</comment>",
-                $configuration->getName(),
-                $configuration->getKey(),
-                $value,
-                $configuration->getDescription())
-            );
-            unset($configurationDescriptions[$key]);
-        }
 
-        $output->writeln("\n<options=underscore>Catalog Configurations</>");
-        if (empty($configurationDescriptions)) {
-            $output->writeln(sprintf(' - %s <info>(%s)</info> : <comment>Contains no configuration items.</comment>', $catalogNode->getName(), $catalogNode->getKey()));
-        } else {
-            foreach ($configurationDescriptions as $description) {
-                $output->writeln(sprintf(" - %s <info>(%s)</info> : <comment>%s</comment>", $description->getName(), $description->getKey(), $description->getDescription()));
+        if(!empty($requiredConfiguration)) {
+            $output->writeln("Required Configuration:");
+            foreach ($requiredConfiguration as $key => $value) {
+                $output->writeln(sprintf(
+                        " - %s <info>(%s)</info> : <comment>%s</comment>",
+                        $value->getName(),
+                        $value->getKey(),
+                        $value->getDescription())
+                );
             }
         }
-        return Command::SUCCESS;
+
+        if(!empty($optionalConfiguration)) {
+            $output->writeln("Optional Configuration:");
+            foreach ($optionalConfiguration as $key => $value) {
+                $output->writeln(sprintf(
+                        " - %s <info>(%s)</info> : <comment>%s</comment>",
+                        $value->getName(),
+                        $value->getKey(),
+                        $value->getDescription())
+                );
+            }
+        }
+
+        if(!empty($catalogSuppliedValues)) {
+            $output->writeln("Catalog Node Provided Configuration:");
+            foreach ($catalogSuppliedValues as $key => $value) {
+                $output->writeln(sprintf(
+                        " - %s <info>(%s)</info> : <comment>%s</comment>",
+                        $value->getName(),
+                        $value->getKey(),
+                        $value->getDescription())
+                );
+            }
+        }
+
+        if (!empty($resultDescriptions)) {
+            $output->writeln("Results:");
+            foreach ($resultDescriptions as $key => $value) {
+                $output->writeln(sprintf(
+                        " - %s : <comment>%s</comment>",
+                        $key,
+                        $value)
+                );
+            }
+        }
+
+        $output->writeln("");
     }
 }
