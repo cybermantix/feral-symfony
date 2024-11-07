@@ -66,3 +66,5 @@ services:
         arguments: ['@Feral\Core\Process\ProcessFactory', '@Feral\Core\Process\Engine\ProcessEngine']
 
     Feral\Core\Process\Runner\RunnerInterface: '@feral.runner'
+
+    Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface: '@Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector'

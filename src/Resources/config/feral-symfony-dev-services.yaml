@@ -10,7 +10,6 @@ services:
     Feral\Symfony\Process\DataCollector\Trace\ProcessTrace: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessBuilder: ~
-    Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface: '@Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector'
     Feral\Symfony\Process\DataCollector\Trace\ProcessBuilderInterface: '@Feral\Symfony\Process\DataCollector\Trace\ProcessBuilder'
     Feral\Symfony\Process\DataCollector\ProcessCollector:
         tags:
