@@ -2,15 +2,15 @@
 
 namespace Feral\Symfony\Process\Event\Listener;
 
-use Feral\Core\Process\Event\ProcessExceptionEvent;
-use Feral\Core\Process\Event\ProcessNodeNotifyEvent;
 use Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface;
 use Feral\Core\Process\Event\ProcessEndEvent;
 use Feral\Core\Process\Event\ProcessNodeAfterEvent;
 use Feral\Core\Process\Event\ProcessNodeBeforeEvent;
 use Feral\Core\Process\Event\ProcessStartEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\DependencyInjection\Attribute\When;
 
+#[When(env: 'dev')]
 class ProfilerProcessSubscriber implements EventSubscriberInterface
 {
     public function __construct(private ProcessTraceCollectorInterface $collector){}
