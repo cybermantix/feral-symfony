@@ -67,4 +67,5 @@ services:
 
     Feral\Core\Process\Runner\RunnerInterface: '@feral.runner'
 
+    Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollectorInterface: '@Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector'

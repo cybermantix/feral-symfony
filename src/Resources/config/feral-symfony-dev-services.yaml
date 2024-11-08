@@ -8,7 +8,6 @@ services:
     Feral\Symfony\Process\Event\Listener\ProcessEventListener: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessRunTrace: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessTrace: ~
-    Feral\Symfony\Process\DataCollector\Trace\ProcessTraceCollector: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessBuilder: ~
     Feral\Symfony\Process\DataCollector\Trace\ProcessBuilderInterface: '@Feral\Symfony\Process\DataCollector\Trace\ProcessBuilder'
     Feral\Symfony\Process\DataCollector\ProcessCollector:
